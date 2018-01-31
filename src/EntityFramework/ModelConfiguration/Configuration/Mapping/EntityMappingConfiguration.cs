@@ -17,9 +17,9 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    // Equivalent to a mapping fragment in the MSL
+    /// Equivalent to a mapping fragment in the MSL
     [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-    internal class EntityMappingConfiguration
+    public class EntityMappingConfiguration
     {
         #region Fields and constructors
 
@@ -34,8 +34,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
             = new Dictionary<PropertyPath, PrimitivePropertyConfiguration>();
 
         private readonly IDictionary<string, object> _annotations = new Dictionary<string, object>();
-
-        internal EntityMappingConfiguration()
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityMappingConfiguration()
         {
         }
 
@@ -72,9 +74,13 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
         #endregion
 
         #region Properties
-
+        /// <summary>
+        /// 
+        /// </summary>
         public bool MapInheritedProperties { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public DatabaseName TableName
         {
             get { return _tableName; }
@@ -85,12 +91,18 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
                 _tableName = value;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, object> Annotations
         {
             get { return _annotations; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
         public virtual void SetAnnotation(string name, object value)
         {
             // Technically we could accept some names that are invalid in EDM, but this is not too restrictive
@@ -103,8 +115,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
 
             _annotations[name] = value;
         }
-
-        internal List<PropertyPath> Properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<PropertyPath> Properties
         {
             get { return _properties; }
             set
@@ -157,12 +171,17 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
         #endregion
 
         #region Condition Properties
-
+        /// <summary>
+        /// 
+        /// </summary>
         public List<ValueConditionConfiguration> ValueConditions
         {
             get { return _valueConditions; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueCondition"></param>
         public void AddValueCondition(ValueConditionConfiguration valueCondition)
         {
             DebugCheck.NotNull(valueCondition);
@@ -179,7 +198,9 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
                 existingValueCondition.Value = valueCondition.Value;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Used by test code.")]
         public List<NotNullConditionConfiguration> NullabilityConditions
@@ -192,7 +213,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
                 value.Each(AddNullabilityCondition);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="notNullConditionConfiguration"></param>
         public void AddNullabilityCondition(NotNullConditionConfiguration notNullConditionConfiguration)
         {
             DebugCheck.NotNull(notNullConditionConfiguration);
@@ -204,7 +228,11 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
         }
 
         #endregion
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entityType"></param>
+        /// <returns></returns>
         public bool MapsAnyInheritedProperties(EntityType entityType)
         {
             var properties = new HashSet<EdmPropertyPath>();
@@ -223,7 +251,7 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Mapping
 
         [SuppressMessage("Microsoft.Maintainability","CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public void Configure(
+        internal void Configure(
             DbDatabaseMapping databaseMapping,
             ICollection<EntitySet> entitySets,
             DbProviderManifest providerManifest,

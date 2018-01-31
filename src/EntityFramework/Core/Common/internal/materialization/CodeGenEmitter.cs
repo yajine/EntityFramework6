@@ -36,6 +36,7 @@ namespace System.Data.Entity.Core.Common.Internal.Materialization
         internal static readonly MethodInfo DbDataReader_GetGuid = typeof(DbDataReader).GetOnlyDeclaredMethod("GetGuid");
         internal static readonly MethodInfo DbDataReader_GetByte = typeof(DbDataReader).GetOnlyDeclaredMethod("GetByte");
         internal static readonly MethodInfo DbDataReader_IsDBNull = typeof(DbDataReader).GetOnlyDeclaredMethod("IsDBNull");
+        internal static readonly MethodInfo DbDataReader_GetOrdinal = typeof(DbDataReader).GetOnlyDeclaredMethod("GetOrdinal");
 
         internal static readonly ConstructorInfo EntityKey_ctor_SingleKey =
             typeof(EntityKey).GetDeclaredConstructor(typeof(EntitySetBase), typeof(object));

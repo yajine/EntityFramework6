@@ -5,20 +5,20 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Primiti
     using System.Data.Entity.Core.Metadata.Edm;
     using System.Data.Entity.Utilities;
 
-    // <summary>
-    // Used to configure a <see cref="DateTime" /> property of an entity type or
-    // complex type.
-    // </summary>
-    internal class DateTimePropertyConfiguration : PrimitivePropertyConfiguration
+    /// <summary>
+    /// Used to configure a <see cref="DateTime" /> property of an entity type or
+    /// complex type.
+    /// </summary>
+    public class DateTimePropertyConfiguration : PrimitivePropertyConfiguration
     {
-        // <summary>
-        // Gets or sets the precision of the property.
-        // </summary>
+        /// <summary>
+        /// Gets or sets the precision of the property.
+        /// </summary>
         public byte? Precision { get; set; }
 
-        // <summary>
-        // Initializes a new instance of the DateTimePropertyConfiguration class.
-        // </summary>
+        /// <summary>
+        /// Initializes a new instance of the DateTimePropertyConfiguration class.
+        /// </summary>
         public DateTimePropertyConfiguration()
         {
         }
@@ -35,7 +35,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Primiti
         {
             return new DateTimePropertyConfiguration(this);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         protected override void ConfigureProperty(EdmProperty property)
         {
             base.ConfigureProperty(property);

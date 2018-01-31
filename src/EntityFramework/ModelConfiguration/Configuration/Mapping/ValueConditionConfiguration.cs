@@ -27,11 +27,18 @@ namespace System.Data.Entity.ModelConfiguration.Configuration
         private readonly EntityMappingConfiguration _entityMappingConfiguration;
 
         internal string Discriminator { get; set; }
-        internal object Value { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Value { get; set; }
 
         private Properties.Primitive.PrimitivePropertyConfiguration _configuration;
-
-        internal ValueConditionConfiguration(EntityMappingConfiguration entityMapConfiguration, string discriminator)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entityMapConfiguration"></param>
+        /// <param name="discriminator"></param>
+        public ValueConditionConfiguration(EntityMappingConfiguration entityMapConfiguration, string discriminator)
         {
             DebugCheck.NotNull(entityMapConfiguration);
             DebugCheck.NotEmpty(discriminator);

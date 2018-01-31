@@ -12,7 +12,10 @@ namespace System.Data.Entity.Utilities
     using System.Text.RegularExpressions;
     using Resources;
 
-    internal class DatabaseName
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DatabaseName
     {
         private const string NamePartRegex
             = @"(?:(?:\[(?<part{0}>(?:(?:\]\])|[^\]])+)\])|(?<part{0}>[^\.\[\]]+))";
@@ -25,7 +28,11 @@ namespace System.Data.Entity.Utilities
                     string.Format(CultureInfo.InvariantCulture, NamePartRegex, 1),
                     string.Format(CultureInfo.InvariantCulture, NamePartRegex, 2)),
                 RegexOptions.Compiled);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static DatabaseName Parse(string name)
         {
             DebugCheck.NotEmpty(name);
@@ -49,28 +56,42 @@ namespace System.Data.Entity.Utilities
         // must ensure that instances are cloned when cloning the DbModelBuilder.
         private readonly string _name;
         private readonly string _schema;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
         public DatabaseName(string name)
             : this(name, null)
         {
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="schema"></param>
         public DatabaseName(string name, string schema)
         {
             _name = name;
             _schema = !string.IsNullOrEmpty(schema) ? schema : null;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name
         {
             get { return _name; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string Schema
         {
             get { return _schema; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             var s = Escape(_name);
@@ -89,7 +110,11 @@ namespace System.Data.Entity.Utilities
                        ? "[" + name.Replace("]", "]]") + "]"
                        : name;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(DatabaseName other)
         {
             if (ReferenceEquals(null, other))
@@ -105,7 +130,11 @@ namespace System.Data.Entity.Utilities
             return string.Equals(other._name, _name, StringComparison.Ordinal)
                    && string.Equals(other._schema, _schema, StringComparison.Ordinal);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -121,7 +150,10 @@ namespace System.Data.Entity.Utilities
             return (obj.GetType() == typeof(DatabaseName))
                    && Equals((DatabaseName)obj);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked

@@ -205,8 +205,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration
             return new DateTimePropertyConfiguration(
                 Property<Properties.Primitive.DateTimePropertyConfiguration>(propertyExpression));
         }
-
-        internal abstract StructuralTypeConfiguration Configuration { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public abstract StructuralTypeConfiguration Configuration { get; }
 
         internal abstract TPrimitivePropertyConfiguration Property<TPrimitivePropertyConfiguration>(
             LambdaExpression lambdaExpression)

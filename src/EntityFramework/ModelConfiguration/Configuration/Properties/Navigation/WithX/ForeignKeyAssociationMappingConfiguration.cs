@@ -24,8 +24,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration
         private readonly IDictionary<Tuple<string, string>, object> _annotations = new Dictionary<Tuple<string, string>, object>();
 
         private DatabaseName _tableName;
-
-        internal ForeignKeyAssociationMappingConfiguration()
+        /// <summary>
+        /// 
+        /// </summary>
+        public ForeignKeyAssociationMappingConfiguration()
         {
         }
 

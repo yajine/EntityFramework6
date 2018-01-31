@@ -15,10 +15,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
     using System.Linq;
     using System.Reflection;
 
-    // <summary>
-    // Used to configure a navigation property.
-    // </summary>
-    internal class NavigationPropertyConfiguration : PropertyConfiguration
+    /// <summary>
+    /// Used to configure a navigation property.
+    /// </summary>
+    public class NavigationPropertyConfiguration : PropertyConfiguration
     {
         private readonly PropertyInfo _navigationProperty;
         private RelationshipMultiplicity? _endKind;
@@ -27,8 +27,11 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
         private ConstraintConfiguration _constraint;
         private AssociationMappingConfiguration _associationMappingConfiguration;
         private ModificationStoredProceduresConfiguration _modificationStoredProceduresConfiguration;
-
-        internal NavigationPropertyConfiguration(PropertyInfo navigationProperty)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="navigationProperty"></param>
+        public NavigationPropertyConfiguration(PropertyInfo navigationProperty)
         {
             DebugCheck.NotNull(navigationProperty);
             Debug.Assert(navigationProperty.IsValidEdmNavigationProperty());
@@ -68,9 +71,9 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
             return new NavigationPropertyConfiguration(this);
         }
 
-        // <summary>
-        // Gets or sets the action to take when a delete operation is attempted.
-        // </summary>
+        /// <summary>
+        /// Gets or sets the action to take when a delete operation is attempted.
+        /// </summary>
         public OperationAction? DeleteAction { get; set; }
 
         internal PropertyInfo NavigationProperty
@@ -78,9 +81,9 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
             get { return _navigationProperty; }
         }
 
-        // <summary>
-        // Gets or sets the multiplicity of this end of the navigation property.
-        // </summary>
+        /// <summary>
+        /// Gets or sets the multiplicity of this end of the navigation property.
+        /// </summary>
         public RelationshipMultiplicity? RelationshipMultiplicity
         {
             get { return _endKind; }
@@ -91,13 +94,15 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
                 _endKind = value;
             }
         }
-
-        internal PropertyInfo InverseNavigationProperty
+        /// <summary>
+        /// 
+        /// </summary>
+        public PropertyInfo InverseNavigationProperty
         {
             get { return _inverseNavigationProperty; }
             set
             {
-                DebugCheck.NotNull(value);
+                //DebugCheck.NotNull(value);
 
                 if (value == _navigationProperty)
                 {
@@ -107,8 +112,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
                 _inverseNavigationProperty = value;
             }
         }
-
-        internal RelationshipMultiplicity? InverseEndKind
+        /// <summary>
+        /// 
+        /// </summary>
+        public RelationshipMultiplicity? InverseEndKind
         {
             get { return _inverseEndKind; }
             set
@@ -119,14 +126,14 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
             }
         }
 
-        // <summary>
-        // Gets or sets the constraint associated with the navigation property.
-        // </summary>
-        // <remarks>
-        // This property uses <see cref="ForeignKeyConstraintConfiguration" /> for
-        // foreign key constraints and <see cref="IndependentConstraintConfiguration" />
-        // for independent constraints.
-        // </remarks>
+        /// <summary>
+        /// Gets or sets the constraint associated with the navigation property.
+        /// </summary>
+        /// <remarks>
+        /// This property uses <see cref="ForeignKeyConstraintConfiguration" /> for
+        /// foreign key constraints and <see cref="IndependentConstraintConfiguration" />
+        /// for independent constraints.
+        /// </remarks>
         public ConstraintConfiguration Constraint
         {
             get { return _constraint; }
@@ -138,12 +145,14 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Navigat
             }
         }
 
-        // <summary>
-        // True if the NavigationProperty's declaring type is the principal end, false if it is not, null if it is not known
-        // </summary>
-        internal bool? IsNavigationPropertyDeclaringTypePrincipal { get; set; }
-
-        internal AssociationMappingConfiguration AssociationMappingConfiguration
+        /// <summary>
+        /// True if the NavigationProperty's declaring type is the principal end, false if it is not, null if it is not known
+        /// </summary>
+        public bool? IsNavigationPropertyDeclaringTypePrincipal { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public AssociationMappingConfiguration AssociationMappingConfiguration
         {
             get { return _associationMappingConfiguration; }
             set

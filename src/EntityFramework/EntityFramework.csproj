@@ -13,7 +13,7 @@
     <AssemblyName>EntityFramework</AssemblyName>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <FileAlignment>512</FileAlignment>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\EcmaPublicKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>true</DelaySign>
   </PropertyGroup>
@@ -38,8 +38,9 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1573;1572;1570</NoWarn>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\Strict.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugNet40|AnyCPU' ">
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -261,6 +262,9 @@
     <Compile Include="Infrastructure\Interception\DbConfigurationInterceptionContext.cs" />
     <Compile Include="Infrastructure\Interception\IDbConfigurationInterceptor.cs" />
     <Compile Include="Infrastructure\ConsolidatedIndex.cs" />
+    <Compile Include="Infrastructure\Interception\IPropertyBindingInterceptor.cs" />
+    <Compile Include="Infrastructure\Interception\PropertyBindingDispatcher.cs" />
+    <Compile Include="Infrastructure\Interception\PropertyBindingInterceptor.cs" />
     <Compile Include="Infrastructure\TableExistenceChecker.cs" />
     <Compile Include="Infrastructure\Transactions\CommitFailedException.cs" />
     <Compile Include="Infrastructure\DependencyResolution\AppConfigDependencyResolver.cs" />

@@ -26,8 +26,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration
         private DatabaseName _tableName;
 
         private readonly IDictionary<string, object> _annotations = new Dictionary<string, object>();
-
-        internal ManyToManyAssociationMappingConfiguration()
+        /// <summary>
+        /// 
+        /// </summary>
+        public ManyToManyAssociationMappingConfiguration()
         {
         }
 

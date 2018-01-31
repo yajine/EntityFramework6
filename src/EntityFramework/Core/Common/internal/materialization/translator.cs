@@ -21,6 +21,7 @@ namespace System.Data.Entity.Core.Common.Internal.Materialization
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Infrastructure.Interception;
 
     // <summary>
     // Translates query ColumnMap into ShaperFactory. Basically, we interpret the
@@ -169,6 +170,7 @@ namespace System.Data.Entity.Core.Common.Internal.Materialization
 
             private bool _inNullableType;
 
+            private readonly Lazy<DbDispatchers> _dispatchers;
             #endregion
 
             public static readonly MethodInfo Translator_MultipleDiscriminatorPolymorphicColumnMapHelper
@@ -188,6 +190,7 @@ namespace System.Data.Entity.Core.Common.Internal.Materialization
                 ColumnTypes = new Dictionary<int, Type>();
                 NullableColumns = new Set<int>();
                 IsValueLayer = valueLayer;
+                _dispatchers = new Lazy<DbDispatchers>(() => DbInterception.Dispatch);
             }
 
             #region "Public" surface
@@ -481,9 +484,13 @@ namespace System.Data.Entity.Core.Common.Internal.Materialization
                             propertyType, scalarColumnMap.ColumnPos, propertyName, propertyAccessor.DeclaringType.Name, scalarColumnMap.Type);
                         _currentCoordinatorScratchpad.AddExpressionWithErrorHandling(valueReader, valueReaderWithErrorHandling);
                     }
-
+                    if (propertyInfoForSet.Name == "IsDeleted") continue;
                     result.Add(Expression.Bind(propertyInfoForSet, valueReader));
                 }
+                var cSpaceType = (EntityType)columnMap.Type.EdmType;
+                var oSpaceType = (ClrEntityType)LookupObjectMapping(cSpaceType).ClrType;
+                var clrType = oSpaceType.ClrType;
+                _dispatchers.Value.PropertyBinding.AddPropertyBindings(clrType, result);
                 return result;
             }
 

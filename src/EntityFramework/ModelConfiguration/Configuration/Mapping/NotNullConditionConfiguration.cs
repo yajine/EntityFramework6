@@ -23,8 +23,12 @@ namespace System.Data.Entity.ModelConfiguration.Configuration
         private readonly EntityMappingConfiguration _entityMappingConfiguration;
 
         internal PropertyPath PropertyPath { get; set; }
-
-        internal NotNullConditionConfiguration(
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entityMapConfiguration"></param>
+        /// <param name="propertyPath"></param>
+        public NotNullConditionConfiguration(
             EntityMappingConfiguration entityMapConfiguration, PropertyPath propertyPath)
         {
             DebugCheck.NotNull(entityMapConfiguration);

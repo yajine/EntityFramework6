@@ -40,8 +40,10 @@ namespace System.Data.Entity.ModelConfiguration
 
             _entityTypeConfiguration = entityTypeConfiguration;
         }
-
-        internal override StructuralTypeConfiguration Configuration
+        /// <summary>
+        /// 
+        /// </summary>
+        public override StructuralTypeConfiguration Configuration
         {
             get { return _entityTypeConfiguration; }
         }

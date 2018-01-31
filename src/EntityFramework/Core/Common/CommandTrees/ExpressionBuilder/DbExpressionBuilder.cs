@@ -2845,6 +2845,24 @@ namespace System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TProjection"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="alias"></param>
+        /// <param name="projection"></param>
+        /// <returns></returns>
+        public static DbProjectExpression Select<TProjection>(this DbExpression source, string alias, Func<DbExpression, TProjection> projection)
+        {
+            Check.NotNull(source, "source");
+
+            var binding = source.BindAs(alias);
+            TProjection argumentResult = projection(binding.Variable);
+            var projectionExp = ResolveToExpression(argumentResult);
+            return binding.Project(projectionExp);
+        }
+
+        /// <summary>
         /// Creates a new <see cref="T:System.Data.Entity.Core.Common.CommandTrees.DbApplyExpression" /> that evaluates the given apply expression once for each element of a given input set, producing a collection of rows with corresponding input and apply columns. Rows for which apply evaluates to an empty set are not included. A
         /// <see
         ///     cref="T:System.Data.Entity.Core.Common.CommandTrees.DbProjectExpression" />

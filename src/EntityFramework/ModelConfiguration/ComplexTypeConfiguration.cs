@@ -53,7 +53,10 @@ namespace System.Data.Entity.ModelConfiguration
             _complexTypeConfiguration = configuration;
         }
 
-        internal override StructuralTypeConfiguration Configuration
+        /// <summary>
+        /// 
+        /// </summary>
+        public override StructuralTypeConfiguration Configuration
         {
             get { return _complexTypeConfiguration; }
         }

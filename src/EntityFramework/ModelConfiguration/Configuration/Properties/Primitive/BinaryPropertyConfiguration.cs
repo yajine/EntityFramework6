@@ -8,21 +8,21 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Primiti
     using System.Data.Entity.Core.Metadata.Edm;
     using System.Data.Entity.Utilities;
 
-    // <summary>
-    // Used to configure a <see cref="T:Byte[]" /> property of an entity type or
-    // complex type.
-    // </summary>
-    internal class BinaryPropertyConfiguration : LengthPropertyConfiguration
+    /// <summary>
+    /// Used to configure a <see cref="T:Byte[]" /> property of an entity type or
+    /// complex type.
+    /// </summary>
+    public class BinaryPropertyConfiguration : LengthPropertyConfiguration
     {
-        // <summary>
-        // Gets or sets a value indicating whether the property is a row version in the
-        // database.
-        // </summary>
+        /// <summary>
+        /// Gets or sets a value indicating whether the property is a row version in the
+        /// database.
+        /// </summary>
         public bool? IsRowVersion { get; set; }
 
-        // <summary>
-        // Initializes a new instance of the BinaryPropertyConfiguration class.
-        // </summary>
+        /// <summary>
+        /// Initializes a new instance of the BinaryPropertyConfiguration class.
+        /// </summary>
         public BinaryPropertyConfiguration()
         {
         }
@@ -39,7 +39,10 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Primiti
         {
             return new BinaryPropertyConfiguration(this);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
         protected override void ConfigureProperty(EdmProperty property)
         {
             if (IsRowVersion != null
@@ -55,7 +58,12 @@ namespace System.Data.Entity.ModelConfiguration.Configuration.Properties.Primiti
 
             base.ConfigureProperty(property);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="column"></param>
+        /// <param name="table"></param>
+        /// <param name="providerManifest"></param>
         protected override void ConfigureColumn(EdmProperty column, EntityType table, DbProviderManifest providerManifest)
         {
             if (IsRowVersion != null

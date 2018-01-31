@@ -22,6 +22,7 @@ namespace System.Data.Entity.Infrastructure.Interception
             new CancelableEntityConnectionDispatcher();
 
         private readonly CancelableDbCommandDispatcher _cancelableCommandDispatcher = new CancelableDbCommandDispatcher();
+        private readonly PropertyBindingDispatcher _propertyBindingDispatcher = new PropertyBindingDispatcher();
 
         internal DbDispatchers()
         {
@@ -74,6 +75,11 @@ namespace System.Data.Entity.Infrastructure.Interception
             get { return _cancelableCommandDispatcher; }
         }
 
+        internal virtual PropertyBindingDispatcher PropertyBinding
+        {
+            get { return _propertyBindingDispatcher; }
+        }
+
         internal virtual void AddInterceptor(IDbInterceptor interceptor)
         {
             DebugCheck.NotNull(interceptor);
@@ -85,6 +91,7 @@ namespace System.Data.Entity.Infrastructure.Interception
             _cancelableEntityConnectionDispatcher.InternalDispatcher.Add(interceptor);
             _cancelableCommandDispatcher.InternalDispatcher.Add(interceptor);
             _configurationDispatcher.InternalDispatcher.Add(interceptor);
+            _propertyBindingDispatcher.InternalDispatcher.Add(interceptor);
         }
 
         internal virtual void RemoveInterceptor(IDbInterceptor interceptor)
@@ -98,6 +105,7 @@ namespace System.Data.Entity.Infrastructure.Interception
             _cancelableEntityConnectionDispatcher.InternalDispatcher.Remove(interceptor);
             _cancelableCommandDispatcher.InternalDispatcher.Remove(interceptor);
             _configurationDispatcher.InternalDispatcher.Remove(interceptor);
+            _propertyBindingDispatcher.InternalDispatcher.Remove(interceptor);
         }
 
         /// <inheritdoc />
